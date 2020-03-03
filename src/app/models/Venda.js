@@ -8,7 +8,10 @@ class Venda extends Model {
         notas: Sequelize.STRING,
         cliente: Sequelize.STRING,
         data: Sequelize.DATE,
+        total: Sequelize.NUMBER,
+        subtotal: Sequelize.NUMBER,
         produto: Sequelize.STRING,
+        chnfe: Sequelize.STRING,
         qtde: Sequelize.NUMBER,
         preco: Sequelize.NUMBER,
         sr_recno: {
@@ -22,6 +25,12 @@ class Venda extends Model {
       }
     );
     return this;
+  }
+
+  static associate(models) {
+    this.belongsTo(models.Produto, { foreignKey: 'produto' });
+    this.belongsTo(models.Cliente, { foreignKey: 'cliente' });
+    this.belongsTo(models.Fatura, { foreignKey: 'notas' });
   }
 }
 

@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-class Produto extends Model {
+class Codbarra extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -8,22 +8,15 @@ class Produto extends Model {
           type: Sequelize.STRING,
           primaryKey: true,
         },
-        nome: Sequelize.STRING,
-        und: Sequelize.STRING,
         codbarra: Sequelize.STRING,
-        marca: Sequelize.STRING,
       },
       {
         sequelize,
-        tableName: process.env.TABLE_PRODUTO,
+        tableName: process.env.TABLE_CODBARRA,
       }
     );
     return this;
   }
-
-  static associate(models) {
-    this.belongsTo(models.Codbarra, { foreignKey: 'codigo' });
-  }
 }
 
-export default Produto;
+export default Codbarra;

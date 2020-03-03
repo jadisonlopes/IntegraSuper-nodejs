@@ -1,29 +1,28 @@
 import Sequelize, { Model } from 'sequelize';
 
-class Produto extends Model {
+class Assinatura extends Model {
   static init(sequelize) {
     super.init(
       {
-        codigo: {
+        notas: {
           type: Sequelize.STRING,
           primaryKey: true,
         },
         nome: Sequelize.STRING,
-        und: Sequelize.STRING,
-        codbarra: Sequelize.STRING,
-        marca: Sequelize.STRING,
+        cpf: Sequelize.STRING,
+        imagem: Sequelize.STRING,
       },
       {
         sequelize,
-        tableName: process.env.TABLE_PRODUTO,
+        tableName: process.env.TABLE_ASSINATURA,
       }
     );
     return this;
   }
 
   static associate(models) {
-    this.belongsTo(models.Codbarra, { foreignKey: 'codigo' });
+    this.belongsTo(models.Venda, { foreignKey: 'notas' });
   }
 }
 
-export default Produto;
+export default Assinatura;

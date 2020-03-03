@@ -1,6 +1,6 @@
 import Sequelize, { Model } from 'sequelize';
 
-class Produto extends Model {
+class Transportador extends Model {
   static init(sequelize) {
     super.init(
       {
@@ -9,13 +9,11 @@ class Produto extends Model {
           primaryKey: true,
         },
         nome: Sequelize.STRING,
-        und: Sequelize.STRING,
-        codbarra: Sequelize.STRING,
-        marca: Sequelize.STRING,
+        motorista: Sequelize.STRING,
       },
       {
         sequelize,
-        tableName: process.env.TABLE_PRODUTO,
+        tableName: process.env.TABLE_TRANSPOR,
       }
     );
     return this;
@@ -26,4 +24,4 @@ class Produto extends Model {
   }
 }
 
-export default Produto;
+export default Transportador;
