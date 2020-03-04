@@ -14,6 +14,7 @@ class VendaController {
         sr_deleted: {
           [Op.ne]: 'T',
         },
+        [Op.or]: [{ excluida: null }, { excluida: false }],
         [Op.or]: [{ notas }, { nfe: notas }],
       },
       attributes: [
@@ -26,6 +27,7 @@ class VendaController {
         'qtde',
         'sr_recno',
       ],
+      order: [['Produto', 'codigo', 'ASC']],
       include: [
         {
           model: Cliente,
@@ -59,6 +61,7 @@ class VendaController {
         },
       ],
     });
+
     return res.status(200).json(venda);
   }
 }

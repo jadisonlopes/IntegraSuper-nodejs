@@ -2,7 +2,6 @@ import { Op } from 'sequelize';
 
 import Venda from '../models/Venda';
 import Cliente from '../models/Cliente';
-import Fatura from '../models/Fatura';
 
 class NotaController {
   async index(req, res) {
@@ -20,15 +19,6 @@ class NotaController {
         {
           model: Cliente,
           attributes: ['nome', 'cpf_cnpj'],
-          where: {
-            sr_deleted: {
-              [Op.ne]: 'T',
-            },
-          },
-        },
-        {
-          model: Fatura,
-          attributes: ['filial', 'notas', 'totparc'],
           where: {
             sr_deleted: {
               [Op.ne]: 'T',

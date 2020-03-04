@@ -5,6 +5,7 @@ class Fatura extends Model {
     super.init(
       {
         filial: Sequelize.STRING,
+        documento: Sequelize.STRING,
         totparc: Sequelize.NUMBER,
         notas: {
           type: Sequelize.STRING,

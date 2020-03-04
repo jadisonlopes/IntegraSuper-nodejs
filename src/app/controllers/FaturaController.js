@@ -12,6 +12,7 @@ class FaturaController {
         sr_deleted: {
           [Op.ne]: 'T',
         },
+        documento: 'BO',
       },
       attributes: ['filial', 'notas', 'totparc'],
     });
