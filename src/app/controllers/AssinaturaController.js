@@ -1,17 +1,33 @@
 import { Op } from 'sequelize';
 
 import Assinatura from '../models/Assinatura';
+import Venda from '../models/Venda';
 
 class AssinaturaController {
   async index(req, res) {
     const { notas } = req.query;
+
     const assinatura = await Assinatura.findOne({
       where: {
-        notas,
         sr_deleted: {
           [Op.ne]: 'T',
         },
       },
+      include: [
+        {
+          model: Venda,
+          attributes: [],
+          where: {
+            filial: '01',
+            sr_deleted: {
+              [Op.ne]: 'T',
+            },
+            [Op.or]: [{ excluida: null }, { excluida: false }],
+            [Op.or]: [{ notas }, { nfe: notas }],
+          },
+          required: true,
+        },
+      ],
       attributes: ['notas', 'nome', 'cpf'],
     });
 
