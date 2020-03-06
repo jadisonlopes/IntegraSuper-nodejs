@@ -5,7 +5,6 @@ class Venda extends Model {
     super.init(
       {
         filial: Sequelize.STRING,
-        notas: Sequelize.STRING,
         cliente: Sequelize.STRING,
         data: Sequelize.DATE,
         total: Sequelize.NUMBER,
@@ -14,8 +13,9 @@ class Venda extends Model {
         chnfe: Sequelize.STRING,
         qtde: Sequelize.NUMBER,
         preco: Sequelize.NUMBER,
-        sr_recno: {
-          type: Sequelize.NUMBER,
+        sr_recno: Sequelize.NUMBER,
+        notas: {
+          type: Sequelize.STRING,
           primaryKey: true,
         },
       },
