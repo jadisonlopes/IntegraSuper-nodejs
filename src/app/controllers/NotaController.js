@@ -26,7 +26,15 @@ class NotaController {
           },
         },
       ],
-      attributes: ['filial', 'notas', 'data', 'cliente', 'total', 'subtotal'],
+      attributes: [
+        'filial',
+        'notas',
+        'data',
+        'cliente',
+        'total',
+        'subtotal',
+        'nfe',
+      ],
     });
     return res.status(200).json(venda);
   }
