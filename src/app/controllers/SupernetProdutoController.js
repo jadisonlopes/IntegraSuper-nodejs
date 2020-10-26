@@ -6,7 +6,7 @@ class SupernetProdutoController {
     const { codigo } = req.params;
     const produto = await SupernetProduto.findOne({
       where: {
-        [Op.or]: [{ codigo }, { codbarra: codigo }],        
+        [Op.or]: [{ codigo }, { codbarra: codigo }],
         sr_deleted: {
           [Op.ne]: 'T',
         },
