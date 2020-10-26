@@ -10,21 +10,15 @@ class Produto extends Model {
         },
         nome: Sequelize.STRING,
         und: Sequelize.STRING,
-        codbarra: Sequelize.STRING,
-        marca: Sequelize.STRING,
         localiz: Sequelize.STRING,
         saldo: Sequelize.NUMBER,
       },
       {
         sequelize,
-        tableName: process.env.TABLE_PRODUTO,
+        tableName: process.env.TABLE_PRODUTO_SUPERNET,
       }
     );
     return this;
-  }
-
-  static associate(models) {
-    this.belongsTo(models.Codbarra, { foreignKey: 'codigo' });
   }
 }
 
