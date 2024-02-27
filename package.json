@@ -1,12 +1,12 @@
 {
-  "name": "palmas",
+  "name": "tablete-palmas",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/server.js"
   },
-  "dependencies": {
+  "dependencies": { 
     "date-fns": "^2.16.1",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",

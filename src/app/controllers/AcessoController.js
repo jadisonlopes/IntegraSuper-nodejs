@@ -7,6 +7,8 @@ class AcessoController {
     
     const user = users.filter( element => element.user === usuario );
 
+    console.log(`${usuario} - logando`);
+
     const userNotExists = (user.length < 1);
     if (userNotExists) 
         return res.status(400).json({ error: 'Usuário não cadastrado!' });

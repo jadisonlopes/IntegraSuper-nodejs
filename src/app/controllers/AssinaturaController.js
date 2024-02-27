@@ -46,7 +46,7 @@ class AssinaturaController {
       attributes: ['notas'],
     });
 
-    if (assinaturaExists) {
+    if (assinaturaExists) { 
       return res.status(400).json({ error: 'Assinatura já coletada!' });
     }
 

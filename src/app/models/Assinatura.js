@@ -10,7 +10,9 @@ class Assinatura extends Model {
         },
         nome: Sequelize.STRING,
         cpf: Sequelize.STRING,
-        imagem: Sequelize.STRING,
+        imagemnfe: Sequelize.STRING,
+        imagemboleto: Sequelize.STRING,
+        conferencia: Sequelize.STRING,
       },
       {
         sequelize,
