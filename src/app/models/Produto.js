@@ -13,6 +13,7 @@ class Produto extends Model {
         codbarra: Sequelize.STRING,
         marca: Sequelize.STRING,
         localiz: Sequelize.STRING,
+        impetiq: Sequelize.STRING,
         saldo: Sequelize.NUMBER,
       },
       {

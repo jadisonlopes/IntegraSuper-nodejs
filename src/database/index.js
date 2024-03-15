@@ -14,6 +14,7 @@ import Assinatura from '../app/models/Assinatura';
 import Usuario from '../app/models/Usuario';
 import Balanco from '../app/models/Balanco';
 import SupernetSaldofil from '../app/models/SupernetSaldofil';
+import FormaVenda from '../app/models/FormaVenda';
 import AnualVendas from '../app/models/AnualVendas';
 import AnualCompras from '../app/models/AnualCompras';
 import UltimasCompras from '../app/models/UltimasCompras';
@@ -31,6 +32,7 @@ const models = [
   Usuario,
   Balanco,
   SupernetSaldofil,
+  FormaVenda,
   AnualVendas,
   AnualCompras,
   UltimasCompras,

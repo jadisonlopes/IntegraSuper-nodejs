@@ -31,7 +31,7 @@ class VendaController {
       include: [
         {
           model: Cliente,
-          attributes: ['codigo', 'nome', 'cpf_cnpj'],
+          attributes: ['codigo', 'nome', 'cpf_cnpj', 'fisica', 'endereco', 'bairro', 'estado', 'cep', 'email', 'cidade'],
           where: {
             sr_deleted: {
               [Op.ne]: 'T',
@@ -40,7 +40,7 @@ class VendaController {
         },
         {
           model: Produto,
-          attributes: ['codigo', 'nome', 'und', 'codbarra', 'marca'],
+          attributes: ['codigo', 'nome', 'und', 'codbarra', 'marca', 'impetiq'],
           where: {
             sr_deleted: {
               [Op.ne]: 'T',

@@ -9,6 +9,7 @@ class Venda extends Model {
         data: Sequelize.DATE,
         total: Sequelize.NUMBER,
         subtotal: Sequelize.NUMBER,
+        formavend: Sequelize.STRING,
         produto: Sequelize.STRING,
         chnfe: Sequelize.STRING,
         qtde: Sequelize.NUMBER,
@@ -31,6 +32,7 @@ class Venda extends Model {
     this.belongsTo(models.Produto, { foreignKey: 'produto' });
     this.belongsTo(models.Cliente, { foreignKey: 'cliente' });
     this.belongsTo(models.Fatura, { foreignKey: 'notas' });
+    this.belongsTo(models.FormaVenda, { foreignKey: 'formavend' });
   }
 }
 
