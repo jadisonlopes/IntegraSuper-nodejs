@@ -2,6 +2,7 @@ import { Op } from 'sequelize';
 
 import Assinatura from '../models/Assinatura';
 import Venda from '../models/Venda';
+import AssinaturaContratoServico from '../services/AssinaturaContratoServico';
 
 class AssinaturaController {
   async index(req, res) {
@@ -51,6 +52,12 @@ class AssinaturaController {
     }
 
     await Assinatura.create(req.body);
+
+    const { imagemcontrato } = req.body;
+    if(!!imagemcontrato) {
+      console.log(notas);
+      new AssinaturaContratoServico().assinar({ codigoVenda: notas, assinaturaBase64: imagemcontrato });
+    }
 
     return res.status(200).send('Gravado!');
   }

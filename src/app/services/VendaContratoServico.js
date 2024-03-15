@@ -1,14 +1,17 @@
 import { Op } from 'sequelize';
+import { format, parseISO } from 'date-fns'
+import * as formatadorUtil from '../utils/FormatadorUtil'
 
 import Venda from '../models/Venda';
 import Produto from '../models/Produto';
 import Codbarra from '../models/Codbarra';
 import Cliente from '../models/Cliente';
+import FormaVenda from '../models/FormaVenda';
 
 class VendaContratoServico {
 	async recuperar(codigoVenda) {
 		try {
-			const venda = await Venda.findAll({
+			const vendas = await Venda.findAll({
 				where: {
 					filial: '01',
 					sr_deleted: {
@@ -25,6 +28,7 @@ class VendaContratoServico {
 					'data',
 					'total',
 					'subtotal',
+					'formavend',
 					'preco',
 					'qtde',
 					'sr_recno',
@@ -33,7 +37,7 @@ class VendaContratoServico {
 				include: [
 					{
 						model: Cliente,
-						attributes: ['codigo', 'nome', 'cpf_cnpj'],
+						attributes: ['codigo', 'nome', 'cpf_cnpj', 'fisica', 'endereco', 'bairro', 'estado', 'cep', 'email', 'cidade'],
 						where: {
 							sr_deleted: {
 								[Op.ne]: 'T',
@@ -61,23 +65,37 @@ class VendaContratoServico {
 							},
 						],
 					},
+					{
+						model: FormaVenda,
+						attributes: ['nome'],
+						where: {
+							sr_deleted: {
+								[Op.ne]: 'T',
+							},
+						},
+					},
 				],
 			});
 
-			return venda;
+			const venda = vendas[0];
+			const cliente = venda.Cliente;
+			const produto = venda.Produto;
+			const produtoFormatado = `${Math.trunc(venda.qtde)}      ${produto.und} ${produto.codigo}   ${produto.nome} ${formatadorUtil.precoBr(venda.preco)} ${formatadorUtil.precoBr(venda.preco * venda.qtde)}`;
+			const endereco = `${cliente.endereco}, ${cliente.bairro}, ${cliente.cidade}-${cliente.estado}, CEP.: ${cliente.cep}`;
+			const dataFormatada = format(parseISO(venda.data), 'dd/MM/yyyy');
 
-			// return {
-			// 	CONTRATO: '000001',
-			// 	NOME_CLIENTE: "Icaro Portela Pires",
-			// 	ENDERECO_CLIENTE: 'Rua G, n. 142, bairro Muchila, Feira de Santana-BA, CEP.: 44.005-352',
-			// 	CPF_CNPJ: 'CPF',
-			// 	NCPF_CNPJ: "001.002.003-04",
-			// 	DATA_PEDIDO: "01/01/2024",
-			// 	VALOR_TOTAL: "R$ 1.854.000,00",
-			// 	PRODUTO_01: "Produto Teste",
-			// 	NOME_FORMA_PAGAMENTO: "A VISTA",
-			// 	LOCAL_DATA_DE_PAGAMENTO: "Feira de Santana - BA 01/01/2024"
-			// }
+			return {
+				CONTRATO: venda.notas,
+				NOME_CLIENTE: cliente.nome,
+				ENDERECO_CLIENTE: endereco,
+				CPF_CNPJ: cliente.fisica == 'J' ? 'CNPJ' : 'CPF',
+				NCPF_CNPJ: formatadorUtil.cpfCnpj(cliente.cpf_cnpj),
+				DATA_PEDIDO: dataFormatada,
+				VALOR_TOTAL: formatadorUtil.precoBr(venda.subtotal),
+				NOME_FORMA_PAGAMENTO: venda.FormaVenda.nome,
+				LOCAL_DATA_DE_PAGAMENTO: `Feira de Santana-BA ${dataFormatada}`,				
+				PRODUTO: produtoFormatado,				
+			}
 		} catch (error) {
 			console.error('Ocorreu um erro:', error);
 		}

@@ -9,11 +9,12 @@
   "dependencies": {
     "date-fns": "^2.16.1",
     "docxtemplater": "^3.46.0",
+    "docxtemplater-image-module-free": "^1.1.1",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
-    "pizzip": "^3.1.6",
     "pg": "^8.11.3",
     "pg-hstore": "^2.3.4",
+    "pizzip": "^3.1.6",
     "sequelize": "^6.37.1"
   },
   "devDependencies": {
